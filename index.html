@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graph Traversal Visualization</title>
+    <link rel="stylesheet" href="/static/styles.css">
+
+</head>
+<body>
+    <div class="container">
+        <h1>Graph Traversal Visualization</h1>
+        <div id="graph-container">
+            <!-- Nodes -->
+            <div class="node" id="node0" style="top: 200px; left: 50px;">0</div>
+            <div class="node" id="node1" style="top: 100px; left: 150px;">1</div>
+            <div class="node" id="node2" style="top: 300px; left: 150px;">2</div>
+            <div class="node" id="node3" style="top: 50px; left: 250px;">3</div>
+            <div class="node" id="node4" style="top: 150px; left: 250px;">4</div>
+            <div class="node" id="node5" style="top: 250px; left: 250px;">5</div>
+            <div class="node" id="node6" style="top: 350px; left: 250px;">6</div>
+            <div class="node" id="node7" style="top: 0px; left: 350px;">7</div>
+            <div class="node" id="node8" style="top: 100px; left: 350px;">8</div>
+            <div class="node" id="node9" style="top: 200px; left: 350px;">9</div>
+            <div class="node" id="node10" style="top: 300px; left: 350px;">10</div>
+            <div class="node" id="node11" style="top: 400px; left: 350px;">11</div>
+            <div class="node" id="node12" style="top: 50px; left: 450px;">12</div>
+            <div class="node" id="node13" style="top: 200px; left: 450px;">13</div>
+            <div class="node" id="node14" style="top: 350px; left: 450px;">14</div>
+        </div>
+        <div class="button-group">
+            <button id="bfs-btn" class="btn">Start BFS</button>
+            <button id="dfs-btn" class="btn">Start DFS</button>
+        </div>
+    </div>
+
+    <script>
+        // Function to change the color of nodes based on traversal
+        function updateNodeColor(nodeId, color) {
+            document.getElementById('node' + nodeId).style.backgroundColor = color;
+        }
+
+        // BFS Traversal
+        document.getElementById('bfs-btn').addEventListener('click', function() {
+            fetch('/bfs')
+            .then(response => response.json())
+            .then(data => {
+                data.forEach((node, index) => {
+                    setTimeout(() => {
+                        updateNodeColor(node, 'red');
+                    }, index * 500);  // Delay for each node
+                });
+            });
+        });
+
+        // DFS Traversal
+        document.getElementById('dfs-btn').addEventListener('click', function() {
+            fetch('/dfs')
+            .then(response => response.json())
+            .then(data => {
+                data.forEach((node, index) =>  {
+                    setTimeout(() => {
+                        updateNodeColor(node, 'blue');
+                    }, index * 500);  // Delay for each node
+                });
+            });
+        });
+    </script>
+</body>
+</html>
